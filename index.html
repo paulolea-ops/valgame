@@ -1,13 +1,460 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eneagramas: Saber Consentido</title>
-    <script type="module" crossorigin src="./assets/index-uQxV-F7e.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DjCF8pAp.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eneagramas: Saber Consentido - Documentación del Sistema Web</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #704214 0%, #C5B358 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+        
+        .mandala-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #704214;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #C5B358;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            color: #5C4A3A;
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+        }
+        
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .doc-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 5px solid #704214;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .doc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .doc-card.priority-high {
+            border-left-color: #dc3545;
+        }
+        
+        .doc-card.priority-medium {
+            border-left-color: #ffc107;
+        }
+        
+        .doc-number {
+            display: inline-block;
+            background: #704214;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .doc-card h4 {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .doc-card p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .doc-card a {
+            display: inline-block;
+            background: #704214;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .doc-card a:hover {
+            background: #8B4513;
+        }
+        
+        .stations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .station-card {
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+        }
+        
+        .station-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .station-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .station-1 { background: linear-gradient(135deg, #4A6FA5, #2E4A6F); }
+        .station-2 { background: linear-gradient(135deg, #C67B5C, #B85C3F); }
+        .station-3 { background: linear-gradient(135deg, #2D8A6E, #1A5F4A); }
+        .station-4 { background: linear-gradient(135deg, #6B4C7F, #4B0082); }
+        .station-5 { background: linear-gradient(135deg, #1E3A5F, #191970); }
+        .station-6 { background: linear-gradient(135deg, #36454F, #434B4D); }
+        .station-7 { background: linear-gradient(135deg, #FF00FF, #00FFFF); }
+        .station-8 { background: linear-gradient(135deg, #0D0D0D, #4A0404); }
+        .station-9 { background: linear-gradient(135deg, #704214, #8B4513); }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #704214, #C5B358);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-card .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #704214, #8B4513);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .cta-section h3 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            background: #C5B358;
+            color: #333;
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            opacity: 0.8;
+        }
+        
+        .priority-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .badge-high {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .badge-medium {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .docs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="mandala-icon">🕸️</div>
+            <h1>Eneagramas: Saber Consentido</h1>
+            <p class="subtitle">Documentación completa del sistema web integral de autoconocimiento basado en el Eneagrama</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="section">
+                <h2>📊 Resumen del Proyecto</h2>
+                <div class="stats">
+                    <div class="stat-card">
+                        <span class="number">9</span>
+                        <span class="label">Estaciones del Ser</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="number">8</span>
+                        <span class="label">Documentos Técnicos</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="number">200K+</span>
+                        <span class="label">Palabras de Documentación</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="number">$655</span>
+                        <span class="label">Inversión MVP/año</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🕸️ Las 9 Estaciones del Ser</h2>
+                <div class="stations-grid">
+                    <div class="station-card station-1">
+                        <h4>1. El Ritmo Justo</h4>
+                        <p>La acción ética que se vuelve fluidez</p>
+                    </div>
+                    <div class="station-card station-2">
+                        <h4>2. Lazos del Alma</h4>
+                        <p>El arte consciente del vínculo</p>
+                    </div>
+                    <div class="station-card station-3">
+                        <h4>3. Roles y Sinergia</h4>
+                        <p>El éxito con rostro auténtico</p>
+                    </div>
+                    <div class="station-card station-4">
+                        <h4>4. Devida Elección</h4>
+                        <p>La vocación que es huella digital</p>
+                    </div>
+                    <div class="station-card station-5">
+                        <h4>5. Patrones Invisibles</h4>
+                        <p>El código fuente de tu psique</p>
+                    </div>
+                    <div class="station-card station-6">
+                        <h4>6. El Centro de Mando</h4>
+                        <p>La soberanía de la decisión</p>
+                    </div>
+                    <div class="station-card station-7">
+                        <h4>7. Conciencia Energética</h4>
+                        <p>La ecología de tu entusiasmo</p>
+                    </div>
+                    <div class="station-card station-8">
+                        <h4>8. El Hábito de la Personalidad</h4>
+                        <p>La encarnación del poder</p>
+                    </div>
+                    <div class="station-card station-9">
+                        <h4>9. Saber Consentido</h4>
+                        <p>El mapa que reconcilia el todo</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📚 Documentación Técnica</h2>
+                <p>Accede a cada documento para ver los detalles completos de arquitectura, diseño y estrategia:</p>
+                
+                <div class="docs-grid">
+                    <div class="doc-card priority-high">
+                        <span class="doc-number">1</span>
+                        <h4>Arquitectura de Información <span class="priority-badge badge-high">ESENCIAL</span></h4>
+                        <p>Mapa del sitio completo, jerarquías, flujos de navegación y estructura de URLs.</p>
+                        <a href="01-arquitectura-informacion.md" target="_blank">Ver documento</a>
+                    </div>
+                    
+                    <div class="doc-card priority-high">
+                        <span class="doc-number">2</span>
+                        <h4>Sistema de Navegación Orgánica <span class="priority-badge badge-high">ESENCIAL</span></h4>
+                        <p>Conexiones del Eneagrama: alas y flechas para cada estación. Menú tipo mandala.</p>
+                        <a href="02-sistema-navegacion-organico.md" target="_blank">Ver documento</a>
+                    </div>
+                    
+                    <div class="doc-card priority-high">
+                        <span class="doc-number">3</span>
+                        <h4>Identidad Visual por Estación <span class="priority-badge badge-high">ESENCIAL</span></h4>
+                        <p>Paletas cromáticas, tipografías, iconografía y mood visual de cada una de las 9 estaciones.</p>
+                        <a href="03-identidad-visual-estaciones.md" target="_blank">Ver documento</a>
+                    </div>
+                    
+                    <div class="doc-card priority-high">
+                        <span class="doc-number">4</span>
+                        <h4>Estructura de Páginas <span class="priority-badge badge-high">ESENCIAL</span></h4>
+                        <p>Wireframes detallados de Home (Matriz) y template reusable para las 8 estaciones.</p>
+                        <a href="04-estructura-paginas.md" target="_blank">Ver documento</a>
+                    </div>
+                    
+                    <div class="doc-card priority-medium">
+                        <span class="doc-number">5</span>
+                        <h4>Secciones Transversales <span class="priority-badge badge-medium">IMPORTANTE</span></h4>
+                        <p>Diseño de Blog, Tienda, Comunidad y Calendario de Eventos.</p>
+                        <a href="05-secciones-transversales.md" target="_blank">Ver documento</a>
+                    </div>
+                    
+                    <div class="doc-card priority-medium">
+                        <span class="doc-number">6</span>
+                        <h4>Stack Tecnológico <span class="priority-badge badge-medium">IMPORTANTE</span></h4>
+                        <p>WordPress + Elementor, plugins esenciales, integraciones y presupuesto.</p>
+                        <a href="06-stack-tecnologico.md" target="_blank">Ver documento</a>
+                    </div>
+                    
+                    <div class="doc-card priority-medium">
+                        <span class="doc-number">7</span>
+                        <h4>Estrategia de Conversión <span class="priority-badge badge-medium">IMPORTANTE</span></h4>
+                        <p>Lead magnets por estación, embudos automatizados, ofertas combinadas.</p>
+                        <a href="07-estrategia-conversion.md" target="_blank">Ver documento</a>
+                    </div>
+                    
+                    <div class="doc-card priority-high">
+                        <span class="doc-number">8</span>
+                        <h4>Resumen Ejecutivo <span class="priority-badge badge-high">ESENCIAL</span></h4>
+                        <p>Síntesis completa del proyecto, checklist de implementación y calendario de lanzamiento.</p>
+                        <a href="08-resumen-ejecutivo.md" target="_blank">Ver documento</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🎯 Características Clave del Sistema</h2>
+                
+                <h3>🔄 Navegación Orgánica</h3>
+                <p>Cada estación se conecta con sus 4 relaciones naturales del Eneagrama (2 alas + 2 flechas), creando una experiencia de exploración que refleja la estructura misma del sistema.</p>
+                
+                <h3>🎨 Identidad Visual Única</h3>
+                <p>Cada una de las 9 estaciones tiene su propia paleta cromática, tipografía y simbolismo, manteniendo coherencia familiar.</p>
+                
+                <h3>🧭 Test de Orientación</h3>
+                <p>No determina eneatipo, sino que orienta al visitante hacia la estación que puede acompañarle mejor según su dolor/interés actual.</p>
+                
+                <h3>📦 Ofertas Sistémicas</h3>
+                <p>Paquetes por tríadas (mental, emocional, instintiva) y viajes de alas que reflejan las conexiones naturales del Eneagrama.</p>
+                
+                <h3>👥 Comunidad Integrada</h3>
+                <p>Grupos específicos por estación, foros de discusión y eventos mensuales rotativos.</p>
+            </div>
+            
+            <div class="section">
+                <h2>⚙️ Stack Tecnológico Recomendado</h2>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li><strong>CMS:</strong> WordPress + Elementor Pro</li>
+                    <li><strong>E-commerce:</strong> WooCommerce + Subscriptions</li>
+                    <li><strong>Membresía:</strong> MemberPress</li>
+                    <li><strong>CRM/Email:</strong> FluentCRM</li>
+                    <li><strong>Calendario:</strong> Amelia</li>
+                    <li><strong>SEO:</strong> RankMath Pro</li>
+                </ul>
+                <p style="margin-top: 15px;"><strong>Inversión estimada:</strong> $655/año (MVP) o $1,311/año (Completo)</p>
+            </div>
+            
+            <div class="cta-section">
+                <h3>🚀 ¿Listo para comenzar?</h3>
+                <p>Revisa el Resumen Ejecutivo para una visión completa del proyecto y los próximos pasos recomendados.</p>
+                <a href="08-resumen-ejecutivo.md" class="btn-primary" target="_blank">Ver Resumen Ejecutivo</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Eneagramas: Saber Consentido - Documentación del Sistema Web</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Creado con 💜 para quienes buscan comprenderse</p>
+        </footer>
+    </div>
+</body>
 </html>
